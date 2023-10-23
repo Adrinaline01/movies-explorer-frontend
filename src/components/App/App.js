@@ -6,16 +6,42 @@ import Login from "../Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import Profile from "../Profile/Profile";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Main />} />
-      <Route path='/movies' element={<Movies />} />
+      <Route path='/' element=
+        {
+          <>
+            <Header isAuth={false} />
+            <Main />
+            <Footer />
+          </>
+        }
+      />
+      <Route path='/movies' element=
+        {
+          <>
+            <Header isAuth={true} />
+            <Movies />
+            <Footer />
+          </>
+        }
+      />
+      <Route path='/saved-movies' element=
+        {
+          <>
+            <Header isAuth={true} />
+            <SavedMovies />
+            <Footer />
+          </>
+        }
+      />
       <Route path='/signup' element={<Register />} />
       <Route path='/signin' element={<Login />} />
       <Route path='/profile' element={<Profile />} />
-      <Route path='/saved-movies' element={<SavedMovies />} />
       <Route path='*' element={<PageNotFound />} />
     </Routes>
 

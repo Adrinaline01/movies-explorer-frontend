@@ -45,6 +45,10 @@
   width: 200px;
 }
 
+.profile__input:focus {
+  outline: 1px solid white;
+}
+
 .profile__button-edit {
   font-weight: 400;
   font-size: 13px;
@@ -52,6 +56,7 @@
   margin-top: 220px;
   margin-bottom: 16px;
   color: #FFFFFF;
+  background-color: transparent;
 }
 
 .profile__button-exit {
@@ -59,6 +64,7 @@
   font-size: 13px;
   line-height: 15.73px;
   color: #EE3465;
+  background-color: transparent;
 }
 
 @media screen and (max-width: 1023px) {

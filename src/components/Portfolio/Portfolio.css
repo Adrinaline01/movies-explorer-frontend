@@ -25,8 +25,6 @@
 
 .portfolio__sites-item {
   border-bottom: 1px solid #424242;
-  display: flex;
-  justify-content: space-between;
   padding-bottom: 19px;
 }
 
@@ -41,12 +39,15 @@
   max-height: 50px;
   list-style-type: none;
   text-decoration: none;
+  display: flex;
+  justify-content: space-between;
 }
 
 
 .portfolio__arrow {
   width: 29px;
   max-height: 60px;
+
 }
 
 @media screen and (max-width: 1023px) {

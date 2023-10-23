@@ -1,18 +1,19 @@
-import Logo from '../../images/logo.svg';
+// import Logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
+import Logo from '../Logo/Logo';
 
 function Header({ isAuth }) {
   return (
     <header className="header">
-      <img className="header__logo" src={Logo} />
+      <Logo />
       {isAuth ?
         <Navigation />
         :
         <div className="header__links">
-          <Link className="header__signup-link button" to='/signup' target="_blank">Регистрация</Link>
-          <Link className="header__signin-link" to='/signin' target="_blank">
-            <button className='header__signin-button button'>Войти</button>
+          <Link className="header__signup-link button" to='/signup'>Регистрация</Link>
+          <Link className="header__signin-link" to='/signin'>
+            <button className='header__signin-button button-without-color'>Войти</button>
           </Link>
         </div>
       }

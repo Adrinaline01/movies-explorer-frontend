@@ -55,6 +55,10 @@
   background: #2F2F2F;
 }
 
+.register__input:focus {
+  outline: 1px solid white;
+}
+
 .register__button {
   width: 100%;
   font-size: 14px;

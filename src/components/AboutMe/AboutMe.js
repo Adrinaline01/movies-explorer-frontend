@@ -6,7 +6,7 @@ function AboutMe() {
     <section className="about-me">
     <h2 className="about-me__heading">Студент</h2>
     <article className="about-me__description">
-    <img className="about-me__photo" src={myPhoto} />
+    <img className="about-me__photo" src={myPhoto} alt='Фотография ученика факультета Веб-разработки' />
       <div className="about-me__main-text">
         <h3 className="about-me__name">Андрей</h3>
         <p className="about-me__activity">Студент факультета Веб-разработчик, 26 лет</p>

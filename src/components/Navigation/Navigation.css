@@ -29,7 +29,7 @@
 }
 
 .navigation__link:nth-child(3n) {
-  margin-right: 410px;
+  margin-right: 350px;
 }
 
 .navigation__link {
@@ -46,13 +46,13 @@
   font-weight: 500;
 }
 
-/* .navigation__link_profile {
+.navigation__profile-link {
   background-color: #313131;
   width: 100px;
   height: 32px;
   text-align: center;
   border-radius: 20px;
-} */
+}
 
 .navigation__link-button {
   background-color: #313131;
@@ -60,6 +60,8 @@
   height: 32px;
   text-align: center;
   border-radius: 20px;
+  background-color: transparent;
+  border: 0;
 }
 
 .navigation__link-main {
@@ -132,14 +134,14 @@
     border-bottom: solid 2px #FFFFFF;
   }
 
-  .navigation__link_profile {
+  .navigation__profile-link {
     font-size: 13px;
   }
 
   .navigation__link-main {
     display: block;
   }
-  
+
 }
 
 @media screen and (max-width: 767px) {
@@ -159,6 +161,14 @@
     padding-bottom: 46px;
   }
 
+  .navigation__link:first-child {
+    margin-right: 0;
+    margin-top: 102px;
+  }
 
+  .navigation__link:nth-child(3n) {
+    margin-right: 0;
+    margin-bottom: 420px;
+  }
 
 }

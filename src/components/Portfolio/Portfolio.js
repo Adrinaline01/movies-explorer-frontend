@@ -8,16 +8,21 @@ function Portfolio() {
       <nav className="portfolio__navigation">
         <ul className="portfolio__sites-list">
           <li className="portfolio__sites-item">
-            <Link className="portfolio__site button" to="https://github.com/Adrinaline01/how-to-learn" target="_blank">Статичный сайт</Link>
-            <img className="portfolio__arrow" src={Arrow} />
+            <Link className="portfolio__site button" to="https://github.com/Adrinaline01/how-to-learn" target="_blank">
+              Статичный сайт
+              <img className="portfolio__arrow" src={Arrow} />
+            </Link>
           </li>
           <li className="portfolio__sites-item">
-            <Link className="portfolio__site button" to="https://github.com/Adrinaline01/russian-travel" target="_blank">Адаптивный сайт</Link>
-            <img className="portfolio__arrow" src={Arrow} />
+            <Link className="portfolio__site button" to="https://github.com/Adrinaline01/russian-travel" target="_blank">
+              Адаптивный сайт
+              <img className="portfolio__arrow" src={Arrow} />
+            </Link>
           </li>
           <li className="portfolio__sites-item">
-            <Link className="portfolio__site button" to="https://github.com/Adrinaline01/react-mesto-api-full-gha" target="_blank">Одностраничное приложение</Link>
-            <img className="portfolio__arrow" src={Arrow} />
+            <Link className="portfolio__site button" to="https://github.com/Adrinaline01/react-mesto-api-full-gha" target="_blank">Одностраничное приложение
+              <img className="portfolio__arrow" src={Arrow} />
+            </Link>
           </li>
         </ul>
       </nav>

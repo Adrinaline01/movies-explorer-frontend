@@ -19,16 +19,16 @@ function Navigation() {
       </button>
       <nav className={`navigation__container ${isMenuOpened ? 'navigation__container_opened' : ''}`}>
         <div className='navigation__links'>
-          <NavLink to='/' className={({ isActive }) => `navigation__link-main button navigation__link ${isActive ? 'navigation__link_active' : ''}`}  target="_blank">
+          <NavLink to='/' className={({ isActive }) => `navigation__link-main button navigation__link ${isActive ? 'navigation__link_active' : ''}`} >
             Главная
           </NavLink>
-          <NavLink to='/movies' className={({ isActive }) => `navigation__link button ${isActive ? 'navigation__link_active' : ''}`}  target="_blank">
+          <NavLink to='/movies' className={({ isActive }) => `navigation__link button ${isActive ? 'navigation__link_active' : ''}`} >
             Фильмы
           </NavLink>
-          <NavLink to='/saved-movies' className={({ isActive }) => `navigation__link button ${isActive ? 'navigation__link_active' : ''}`}  target="_blank">
+          <NavLink to='/saved-movies' className={({ isActive }) => `navigation__link button ${isActive ? 'navigation__link_active' : ''}`} >
             Сохранённые фильмы
           </NavLink>
-          <NavLink to='/profile' className='navigation__link navigation__link_profile button'  target="_blank">
+          <NavLink to='/profile' className='navigation__link navigation__profile-link' >
             <button className='navigation__link-button button'>Аккаунт</button>
           </NavLink>
         </div>

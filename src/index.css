@@ -3,7 +3,6 @@
 @import url(./components/Header/Header.css);
 @import url(./components/Navigation/Navigation.css);
 @import url(./components/Promo/Promo.css);
-@import url(./components/NavTab/NavTab.css);
 @import url(./components/AboutProject/AboutProject.css);
 @import url(./components/Techs/Techs.css);
 @import url(./components/AboutMe/AboutMe.css);
@@ -32,7 +31,6 @@ body {
 
 .button {
   text-decoration: none;
-  border: 0;
   opacity: 1;
   transition: opacity 0.5s;
   color: white;
@@ -56,7 +54,6 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: transparent;
 }
 
 .button-without-color:hover {
@@ -77,10 +74,3 @@ body {
   background-color: transparent;
   cursor: pointer;
 }
-
-/* 1. Написать и адаптировать редактирование профиля
-2. Адаптировать Хэдер
-3. Исправить логирование и регистрацию
-4. Доадаптировать карточки
-5. Проверить всё Пиксель Пёрфектом
-6. Привести в порядок кнопки */

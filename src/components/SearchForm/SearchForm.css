@@ -8,16 +8,22 @@
   display: flex;
   gap: 10px;
   margin: 0 auto 0 auto;
+  justify-content: space-between;
 }
 
 .search-form__input {
   background-color:#2F2F2F;
   border-style: none;
   border-radius: 8px;
-  width: 1086px;
+  width: calc(100% - 54px);
   min-height: 50px;
   padding-left: 20px;
   outline: none;
+  color: white;
+}
+
+.search-form__input:focus {
+  outline: 1px solid white;
 }
 
 .search-form__button {
@@ -26,11 +32,12 @@
   height: 44px;
   margin-top: 3px;
   margin-bottom: 3px;
+  background-color: transparent;
 }
 
 @media screen and (max-width: 1023px) {
   .search-form__input {
-    width: 100%;
+    width: calc(100% - 54px);
   }
 
   .search-form__movies {
@@ -47,7 +54,7 @@
   }
 
   .search-form__input {
-    width: 90%;
+    width: calc(100% - 54px);
   }
 
   .search-form__movies {

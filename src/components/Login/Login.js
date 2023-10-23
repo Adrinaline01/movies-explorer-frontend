@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import Logo from '../../images/logo.svg';
+import Logo from '../Logo/Logo';
 
 function Login() {
   return (
     <main>
       <section className='login'>
         <div className='login__container'>
-          <img className='login__logo' src={Logo} />
+          <Logo />
           <h1 className='login__title'>Рады видеть!</h1>
           <form className='login__form'>
             <label className='login__label'>
@@ -18,7 +18,7 @@ function Login() {
               <input className='login__input' required type='password' name='password' placeholder='Пароль' minLength='6' maxLength='127' />
             </label>
             <div className='login__submit'>
-              <button  className='login__button button' type='submit' aria-label='sign-in'>Войти</button>
+              <button className='login__button button' type='submit' aria-label='sign-in'>Войти</button>
               <div className='login__signin'>
                 <p className='login__text'>Ещё не зарегистрированы? <Link to='/signup' className='login__link link'>Регистрация</Link></p>
               </div>
