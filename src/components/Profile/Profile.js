@@ -1,6 +1,6 @@
 import Header from "../Header/Header"
 
-function Profile() {
+function Profile({ logOut }) {
   return (
     <section className="profile">
       <Header isAuth={true} />
@@ -16,7 +16,7 @@ function Profile() {
             <input className="profile__input" />
           </label>
           <button className="profile__button-edit button-without-color">Редактировать</button>
-          <button className="profile__button-exit button-without-color">Выйти из аккаунта</button>
+          <button className="profile__button-exit button-without-color" onClick={logOut}>Выйти из аккаунта</button>
         </form>
       </div>
     </section>

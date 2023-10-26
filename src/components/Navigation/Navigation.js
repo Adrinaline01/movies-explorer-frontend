@@ -3,7 +3,7 @@ import close from '../../images/button_close.svg';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Navigation() {
+function Navigation({ loggedIn }) {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   function handleOpenMenu() {
     setIsMenuOpened(!isMenuOpened);
@@ -11,7 +11,7 @@ function Navigation() {
   return (
     <div className='navigation'>
       <button type='button' className='navigation__burger button' onClick={handleOpenMenu}>
-        {isMenuOpened ?
+        {isMenuOpened && loggedIn ?
           <img className='navigation__close' src={close} alt='close-button' />
           :
           <img className='navigation__menu' src={burger} alt='burger-menu' />

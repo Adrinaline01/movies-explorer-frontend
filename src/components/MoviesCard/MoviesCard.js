@@ -2,38 +2,37 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 
-function MoviesCard({ movie }) {
+function MoviesCard(props) {
   const location = useLocation();
-  const moviesPage = location.pathname === '/movies';
   const savedMoviesPage = location.pathname === '/saved-movies';
+
+
+  const imageMovie = location.pathname === "/saved-movies" ? props.movie.image : `https://api.nomoreparties.co/${props.movie.image.url}`;
 
   const [isSaved, setIsSaved] = useState(false)
 
   const handleSaveClick = () => {
-    if (moviesPage) {
-      setIsSaved(!isSaved);
-    }
+    props.onClick(props.movie)
   };
 
   const buttonSaveCard = savedMoviesPage ? (
-    <button className="movies-card__delete-movie button-for-image" type='button'></button>
+    <button className="movies-card__delete-movie button-for-image" type='button' onClick={handleSaveClick}></button>
   ) : isSaved ? (
-    <button className="movies-card__already-save button-for-image" type='button'></button>
+    <button className="movies-card__already-save button-for-image" type='button' onClick={handleSaveClick}></button>
   ) : (
     <button className="movies-card__save button-for-image" onClick={handleSaveClick} type='button'></button>
   );
 
-  const { title, link, duration } = movie;
-  const hours = Math.floor(duration / 60);
-  const minutes = duration % 60;
+  // const hours = Math.floor(duration / 60);
+  // const minutes = duration % 60;
   return (
     <li className='movies-card'>
       {buttonSaveCard}
-      <img className="movies-card__image" src={link} alt={title} />
+      <img className="movies-card__image" src={imageMovie} alt={props.movie.nameRU} />
       <div className="movies-card__description">
-        <h2 className="movies-card__title">{title}</h2>
+        <h2 className="movies-card__title">{props.movie.nameRU}</h2>
         <div className="movies-card__time">
-          <p className="movies-card__duration">{`${hours}ч ${minutes}м`}</p>
+          <p className="movies-card__duration">{props.movie.duration}</p>
         </div>
       </div>
     </li>

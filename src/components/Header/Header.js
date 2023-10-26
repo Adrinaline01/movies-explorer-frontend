@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Logo from '../Logo/Logo';
 
-function Header({ isAuth }) {
+function Header({ loggedIn }) {
   return (
     <header className="header">
       <Logo />
-      {isAuth ?
-        <Navigation />
+      {loggedIn ? (
+        <Navigation loggedIn={loggedIn} /> )
         :
         <div className="header__links">
           <Link className="header__signup-link button" to='/signup'>Регистрация</Link>

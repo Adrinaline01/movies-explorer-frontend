@@ -52,6 +52,9 @@
   margin: 14px auto 14px auto;
 }
 
+.movies-card-list__message{
+  text-align: center;
+}
 
 .movies-card__title {
   font-size: 13px;

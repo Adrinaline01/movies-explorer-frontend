@@ -1,24 +1,37 @@
 import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { useEffect } from 'react';
 
-function Register() {
+function Register({ onRegister, loggedIn }) {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onRegister(values);
+  }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm])
+
   return (
     <section className='register'>
       <div className='register__container'>
         <Logo />
         <h1 className='register__title'>Добро пожаловать!</h1>
-        <form className='register__form'>
+        <form className='register__form' onSubmit={handleSubmit}>
           <label className='register__label'>
             Имя
-            <input className='register__input' required type='text' name='name' placeholder='Имя' minLength='2' maxLength='30' />
+            <input className='register__input' onChange={handleChange} required type='text' name='name' placeholder='Имя' minLength='2' maxLength='30' />
           </label>
           <label className='register__label'>
             E-mail
-            <input className='register__input' required type='email' name='email' placeholder='Email' />
+            <input className='register__input' onChange={handleChange} required type='email' name='email' placeholder='Email' />
           </label>
           <label className='register__label'>
             Пароль
-            <input className='register__input'  required type='password' name='password' placeholder='Пароль' minLength='6' maxLength='127' />
+            <input className='register__input' onChange={handleChange} required type='password' name='password' placeholder='Пароль' minLength='6' maxLength='127' />
             <span className='register__error'>Что-то пошло не так...</span>
           </label>
           <div className='register__submit'>
