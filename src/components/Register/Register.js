@@ -1,19 +1,19 @@
 import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
-import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { useValidator } from '../../hooks/useValidator';
 import { useEffect } from 'react';
 
 function Register({ onRegister, loggedIn }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useValidator();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onRegister(values);
   }
 
-  useEffect(() => {
-    resetForm();
-  }, [resetForm])
+  // useEffect(() => {
+  //   resetForm();
+  // }, [resetForm])
 
   return (
     <section className='register'>

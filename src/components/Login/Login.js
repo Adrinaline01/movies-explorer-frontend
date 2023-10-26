@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { useValidator } from '../../hooks/useValidator';
 
 function Login({ onLogin }) {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useValidator();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onLogin(values);
-  }
-
+  };
 
   return (
     <main>

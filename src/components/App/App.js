@@ -17,7 +17,7 @@ import { getSavedMovies } from "../../utils/MainApi";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [updateProfileMessage, setUpdateProfileMessage] = useState("");
+  // const [updateProfileMessage, setUpdateProfileMessage] = useState("");
   // const [errorGlobalMessage, setErrorGlobalMessage] = useState("");
   const [savedMovies, setSavedMovies] = useState([]);
   // const location = useLocation();
@@ -68,8 +68,9 @@ function App() {
     mainApi
       .signOut()
       .then(() => {
+        localStorage.clear();
         setLoggedIn(false);
-        navigate("/signin");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -93,7 +94,7 @@ function App() {
       .patchUserInfo(updateUser)
       .then((updateUserData) => {
         setCurrentUser(updateUserData);
-        setUpdateProfileMessage('success');
+        // setUpdateProfileMessage('success');
       })
       .catch((error) => {
         console.log(error);
@@ -127,12 +128,12 @@ function App() {
       })
   }
 
-  const logOut = () => {
-    localStorage.clear();
-    setLoggedIn(false)
-    navigate("/")
-    // Почистить куки
-  }
+  // const logOut = () => {
+  //   localStorage.clear();
+  //   setLoggedIn(false)
+  //   navigate("/")
+  //   // Почистить куки
+  // }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -166,7 +167,7 @@ function App() {
         />
         <Route path='/signup' element={<Register onRegister={handleRegister} loggedIn={loggedIn} />} />
         <Route path='/signin' element={<Login onLogin={handleLogin} />} />
-        <Route path='/profile' element={<Profile loggedIn={loggedIn} onSignOut={handleSignOut} logOut={logOut} />} />
+        <Route path='/profile' element={<Profile loggedIn={loggedIn} onSignOut={handleSignOut} onUpdateUser={handleUpdateUser} />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </CurrentUserContext.Provider>

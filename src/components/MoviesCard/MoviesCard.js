@@ -9,15 +9,13 @@ function MoviesCard(props) {
 
   const imageMovie = location.pathname === "/saved-movies" ? props.movie.image : `https://api.nomoreparties.co/${props.movie.image.url}`;
 
-  const [isSaved, setIsSaved] = useState(false)
-
   const handleSaveClick = () => {
     props.onClick(props.movie)
   };
 
   const buttonSaveCard = savedMoviesPage ? (
     <button className="movies-card__delete-movie button-for-image" type='button' onClick={handleSaveClick}></button>
-  ) : isSaved ? (
+  ) : props.isLike ? (
     <button className="movies-card__already-save button-for-image" type='button' onClick={handleSaveClick}></button>
   ) : (
     <button className="movies-card__save button-for-image" onClick={handleSaveClick} type='button'></button>

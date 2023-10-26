@@ -67,20 +67,6 @@ function MoviesCardList({ moviesData, onClick, savedMovies, searchText, isSaved 
     }
   }, [windowWidth]);
 
-  // useEffect(() => {
-  //   if (windowWidth > 1023) {
-  //     setInitialCount(12);
-  //     return;
-  //   } else if (windowWidth <= 1023 && windowWidth > 750) {
-  //     setInitialCount(8);
-  //     return
-  //   } else if (windowWidth >= 320 && windowWidth <= 1023) {
-  //     setInitialCount(5);
-  //     return;
-  //   }
-  // })
-
-
   const handleLikeFilm = (movie) => {
     console.log(savedMovies)
     if (!isSavedPage) {
@@ -101,11 +87,13 @@ function MoviesCardList({ moviesData, onClick, savedMovies, searchText, isSaved 
               ? moviesData.map((movie) => {
                 return <MoviesCard movie={movie} onClick={onClick}
                   key={isSavedPage ? movie._id : movie.id}
+                  isLike={handleLikeFilm(movie)}
                 />;
               })
               : moviesData.slice(0, initialCount).map((movie) => {
                 return <MoviesCard movie={movie} onClick={onClick}
                   key={isSavedPage ? movie._id : movie.id}
+                  isLike={handleLikeFilm(movie)}
                 />
               })}
           </ul>
