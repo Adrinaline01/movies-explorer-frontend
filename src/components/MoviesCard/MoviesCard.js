@@ -21,16 +21,19 @@ function MoviesCard(props) {
     <button className="movies-card__save button-for-image" onClick={handleSaveClick} type='button'></button>
   );
 
-  // const hours = Math.floor(duration / 60);
-  // const minutes = duration % 60;
+  function timeConverter(mins) {
+    return `${Math.floor(mins / 60)}ч ${mins % 60}м`;
+  }
   return (
     <li className='movies-card'>
       {buttonSaveCard}
-      <img className="movies-card__image" src={imageMovie} alt={props.movie.nameRU} />
+      <a className="movie-card__trailer-link" href={props.movie.trailerLink} target="_blank" rel="noreferrer">
+        <img className="movies-card__image" src={imageMovie} alt={props.movie.nameRU} />
+      </a>
       <div className="movies-card__description">
         <h2 className="movies-card__title">{props.movie.nameRU}</h2>
         <div className="movies-card__time">
-          <p className="movies-card__duration">{props.movie.duration}</p>
+          <p className="movies-card__duration">{timeConverter(props.movie.duration)}</p>
         </div>
       </div>
     </li>
