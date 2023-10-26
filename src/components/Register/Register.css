@@ -71,6 +71,18 @@
   color: #FFFFFF;
   background: #4285F4;
 }
+.register__button_disabled{
+  width: 100%;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  margin: 48px 0 0;
+  padding: 14px 25px;
+  border: none;
+  border-radius: 3px;
+  color: #FFFFFF;
+  background: #2d3f5e;
+}
 
 .register__error {
   font-size: 10px;

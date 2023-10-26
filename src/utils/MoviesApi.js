@@ -16,6 +16,3 @@ export function getAllMovies() {
   })
     .then((res) => checkResponse(res));
 }
-
-//Пароль: 12345678910
-//Почта: adrinaline0101@inbox.ru

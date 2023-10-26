@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://api.adrinalinediploma.nomoredomainsrocks.ru';
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = 'https://api.adrinalinediploma.nomoredomainsrocks.ru';
+// const BASE_URL = "http://localhost:3000";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -54,7 +54,16 @@ export const getUserInfo = () => {
     .then((res) => checkResponse(res));
 }
 
-export const patchUserInfo = (name, email) => {
+export const checkToken = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }).then((res) => checkResponse(res))
+}
+
+export const patchUserInfo = ({ name, email }) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'PATCH',
     credentials: 'include',

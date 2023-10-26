@@ -12,15 +12,22 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import * as mainApi from '../../utils/MainApi';
 import { getSavedMovies } from "../../utils/MainApi";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute"
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [errorGlobal, setErrorGlobal] = useState("");
   // const [updateProfileMessage, setUpdateProfileMessage] = useState("");
   // const [errorGlobalMessage, setErrorGlobalMessage] = useState("");
   const [savedMovies, setSavedMovies] = useState([]);
   // const location = useLocation();
+
+
+  function resetErrorGlobal() {
+    setErrorGlobal("");
+  }
 
   const navigate = useNavigate();
 
@@ -32,7 +39,12 @@ function App() {
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
-        console.log(err);
+        if (err === "Произошла ошибка: 409") {
+          setErrorGlobal("Пользователь с таким email уже существует");
+        } else if (err === "Произошла ошибка: 500") {
+          setErrorGlobal("Сервер не доступен, Попробуйте позже");
+        }
+        console.log(err)
       })
   }
 
@@ -44,9 +56,26 @@ function App() {
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
-        console.log(err);
+        if (err === "Произошла ошибка: 401") {
+          setErrorGlobal("Пользователь с таким email не существует");
+        } else if (err === "Произошла ошибка: 500") {
+          setErrorGlobal("Сервер не доступен, Попробуйте позже");
+        }
+        console.log(err)
       })
   };
+
+  // const tokenCheck = () => {
+  //   mainApi
+  //     .getUserInfo()
+  //     .then((user) => {
+  //       setCurrentUser(user);
+  //       setLoggedIn(true)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const tokenCheck = () => {
     mainApi
@@ -92,12 +121,13 @@ function App() {
   const handleUpdateUser = (updateUser) => {
     mainApi
       .patchUserInfo(updateUser)
-      .then((updateUserData) => {
-        setCurrentUser(updateUserData);
-        // setUpdateProfileMessage('success');
+      .then((data) => {
+        console.log(data)
+        setCurrentUser(data);
+        alert("Данные профиля изменены успешно")
       })
       .catch((error) => {
-        console.log(error);
+        setErrorGlobal(error);;
       })
   }
 
@@ -128,12 +158,12 @@ function App() {
       })
   }
 
-  // const logOut = () => {
-  //   localStorage.clear();
-  //   setLoggedIn(false)
-  //   navigate("/")
-  //   // Почистить куки
-  // }
+  const logOut = () => {
+    localStorage.clear();
+    setLoggedIn(false)
+    navigate("/")
+    handleSignOut()
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -141,33 +171,60 @@ function App() {
         <Route path='/' element=
           {
             <>
-              <Header loggedIn={loggedIn} />
+              <Header loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} />
               <Main />
               <Footer />
             </>
           }
         />
-        <Route path='/movies' element=
+        {/* <Route path='/movies' element=
           {
             <>
-              <Header loggedIn={loggedIn} />
+              <Header loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} />
               <Movies filterByName={filterByName} saveMovies={saveMovies} savedMovies={savedMovies} deleteMovies={deleteMovies} />
               <Footer />
             </>
           }
+        /> */}
+        <Route path='/movies' element={<ProtectedRoute loggedIn={loggedIn}
+          resetErrorGlobal={resetErrorGlobal}
+          filterByName={filterByName}
+          saveMovies={saveMovies}
+          savedMovies={savedMovies}
+          deleteMovies={deleteMovies}
+          element={<>
+            <Header />
+            <Movies />
+            <Footer />
+          </>} />}
         />
-        <Route path='/saved-movies' element=
+
+        {/* <Route path='/saved-movies' element=
           {
             <>
-              <Header loggedIn={loggedIn} />
+              <Header loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} />
               <SavedMovies filterByName={filterByName} savedMovies={savedMovies} deleteMovies={deleteMovies} />
               <Footer />
             </>
           }
+        /> */}
+        <Route path='/saved-movies' element={<ProtectedRoute loggedIn={loggedIn}
+          resetErrorGlobal={resetErrorGlobal}
+          filterByName={filterByName}
+          savedMovies={savedMovies}
+          deleteMovies={deleteMovies} element={
+            <>
+              <Header />
+              <SavedMovies />
+              <Footer />
+            </>
+          } />}
+
         />
-        <Route path='/signup' element={<Register onRegister={handleRegister} loggedIn={loggedIn} />} />
-        <Route path='/signin' element={<Login onLogin={handleLogin} />} />
-        <Route path='/profile' element={<Profile loggedIn={loggedIn} onSignOut={handleSignOut} onUpdateUser={handleUpdateUser} />} />
+        <Route path='/signup' element={<Register onRegister={handleRegister} loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
+        <Route path='/signin' element={<Login onLogin={handleLogin} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
+        {/* <Route path='/profile' element={<Profile loggedIn={loggedIn} onSignOut={logOut} onUpdateUser={handleUpdateUser} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} /> */}
+        <Route path='/profile' element={<ProtectedRoute loggedIn={loggedIn} onSignOut={logOut} onUpdateUser={handleUpdateUser} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} element={Profile} />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </CurrentUserContext.Provider>

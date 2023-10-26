@@ -68,6 +68,19 @@
   background: #4285F4;
 }
 
+.login__button_disabled{
+  width: 100%;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  margin: 159px 0 0;
+  padding: 14px 25px;
+  border: none;
+  border-radius: 3px;
+  color: #FFFFFF;
+  background: #2d3f5e;
+}
+
 .login__signin {
   text-align: center;
 }

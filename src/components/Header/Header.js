@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Logo from '../Logo/Logo';
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, resetErrorGlobal }) {
+  function handleClick() {
+    resetErrorGlobal();
+  }
   return (
     <header className="header">
       <Logo />
       {loggedIn ? (
-        <Navigation loggedIn={loggedIn} /> )
+        <Navigation loggedIn={loggedIn} />)
         :
         <div className="header__links">
           <Link className="header__signup-link button" to='/signup'>Регистрация</Link>
           <Link className="header__signin-link" to='/signin'>
-            <button className='header__signin-button button-without-color'>Войти</button>
+            <button className='header__signin-button button-without-color' onClick={handleClick}>Войти</button>
           </Link>
         </div>
       }
