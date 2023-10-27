@@ -1,3 +1,5 @@
+import React from 'react';
+import { HashLink } from 'react-router-hash-link';
 
 function Promo() {
   return (
@@ -5,9 +7,9 @@ function Promo() {
       <div className="promo__item">
         <h1 className="promo__title">Учебный проект студента факультета Веб-разработки.</h1>
         <div className="promo__links">
-          <button className="promo__about-project-button button">О проекте</button>
-          <button className="promo__technologies-button button">Технологии</button>
-          <button className="promo__student-button button">Студент</button>
+          <HashLink className="promo__about-project-button button" to='#about' smooth>О проекте</HashLink>
+          <HashLink className="promo__technologies-button button" to='#techs' smooth>Технологии</HashLink>
+          <HashLink className="promo__student-button button" to="#student" smooth>Студент</HashLink>
         </div>
       </div>
     </section>

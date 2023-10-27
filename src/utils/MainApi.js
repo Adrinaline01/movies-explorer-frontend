@@ -1,5 +1,4 @@
 const BASE_URL = 'https://api.adrinalinediploma.nomoredomainsrocks.ru';
-// const BASE_URL = "http://localhost:3000";
 
 function checkResponse(res) {
   if (res.ok) {

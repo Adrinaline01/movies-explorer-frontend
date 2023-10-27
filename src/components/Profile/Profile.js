@@ -8,6 +8,7 @@ function Profile({ loggedIn, onSignOut, onUpdateUser, errorGlobal, resetErrorGlo
   const { values, errors, handleChange, isValid, resetForm } = useValidator()
   const [isChange, setIsChange] = useState(false)
 
+
   useEffect(() => {
     if (values.name !== currentUser.name || values.email !== currentUser.email) {
       setIsChange(true);
@@ -17,33 +18,33 @@ function Profile({ loggedIn, onSignOut, onUpdateUser, errorGlobal, resetErrorGlo
   }, [currentUser, values]);
 
   useEffect(() => {
-
     resetForm({
       name: currentUser.name || "",
       email: currentUser.email || "",
-    })
-    setIsChange(false)
-  }, [currentUser])
+    });
+    setIsChange(false);
+  }, [currentUser]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
-    handleChange(e)
+    handleChange(e);
 
     if (name === "name" || name === "email") {
-      setIsChange(true)
+      setIsChange(true);
     }
   }
 
-  const handleSaveClick = () => {
+  const handleSaveClick = (event) => {
+    event.preventDefault();
     if (isValid) {
       const newUserInfo = {
         name: values.name,
         email: values.email,
       }
-      console.log(newUserInfo)
-      onUpdateUser(newUserInfo)
+      onUpdateUser(newUserInfo);
       resetErrorGlobal();
+      setIsChange(false); // Сбросить флаг изменений после сохранения
     }
   }
 
@@ -82,7 +83,7 @@ function Profile({ loggedIn, onSignOut, onUpdateUser, errorGlobal, resetErrorGlo
 
           <span className="profile__profile-error">{errorGlobal}</span>
 
-          <button className={!isValid ? "profile__button-edit_disabled" : "profile__button-edit button-without-color"} onClick={handleSaveClick} disabled={!isValid}>
+          <button className={!isValid || !isChange ? "profile__button-edit_disabled" : "profile__button-edit button-without-color"} onClick={handleSaveClick} disabled={!isValid}>
             Редактировать
           </button>
 

@@ -1,4 +1,4 @@
-import { Route, Router, Routes, useNavigate } from "react-router-dom";
+import { Route, Router, Routes, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Main from "../Main/Main";
@@ -14,22 +14,18 @@ import * as mainApi from '../../utils/MainApi';
 import { getSavedMovies } from "../../utils/MainApi";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute"
 
-
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorGlobal, setErrorGlobal] = useState("");
-  // const [updateProfileMessage, setUpdateProfileMessage] = useState("");
-  // const [errorGlobalMessage, setErrorGlobalMessage] = useState("");
   const [savedMovies, setSavedMovies] = useState([]);
-  // const location = useLocation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
 
   function resetErrorGlobal() {
     setErrorGlobal("");
   }
-
-  const navigate = useNavigate();
 
   const handleRegister = ({ email, password, name }) => {
     mainApi
@@ -54,10 +50,11 @@ function App() {
       .then(() => {
         setLoggedIn(true);
         navigate("/movies", { replace: true });
+        resetErrorGlobal();
       })
       .catch((err) => {
         if (err === "Произошла ошибка: 401") {
-          setErrorGlobal("Пользователь с таким email не существует");
+          setErrorGlobal("Введены некорректные данные");
         } else if (err === "Произошла ошибка: 500") {
           setErrorGlobal("Сервер не доступен, Попробуйте позже");
         }
@@ -78,11 +75,13 @@ function App() {
   // };
 
   const tokenCheck = () => {
+    const currentPatch = pathname;
     mainApi
       .getUserInfo()
       .then((user) => {
         setCurrentUser(user);
         setLoggedIn(true)
+        navigate(currentPatch, { replace: true })
       })
       .catch((err) => {
         console.log(err);
@@ -91,6 +90,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
+
   }, [loggedIn]);
 
   const handleSignOut = () => {
@@ -159,9 +159,6 @@ function App() {
   }
 
   const logOut = () => {
-    localStorage.clear();
-    setLoggedIn(false)
-    navigate("/")
     handleSignOut()
   }
 
@@ -198,8 +195,8 @@ function App() {
           }
         />
 
-        <Route path='/signup' element={<Register onRegister={handleRegister} loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
-        <Route path='/signin' element={<Login onLogin={handleLogin} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
+        <Route path='/signup' element={loggedIn ? <Navigate to='/movies' replace /> : <Register onRegister={handleRegister} loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
+        <Route path='/signin' element={loggedIn ? <Navigate to='/movies' replace /> : <Login onLogin={handleLogin} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
         <Route path='/profile' element=
           {<ProtectedRoute
             loggedIn={loggedIn}
