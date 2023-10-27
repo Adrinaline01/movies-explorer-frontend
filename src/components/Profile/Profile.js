@@ -82,7 +82,7 @@ function Profile({ loggedIn, onSignOut, onUpdateUser, errorGlobal, resetErrorGlo
 
           <span className="profile__profile-error">{errorGlobal}</span>
 
-          <button className="profile__button-edit button-without-color" onClick={handleSaveClick} disabled={!isValid}>
+          <button className={!isValid ? "profile__button-edit_disabled" : "profile__button-edit button-without-color"} onClick={handleSaveClick} disabled={!isValid}>
             Редактировать
           </button>
 

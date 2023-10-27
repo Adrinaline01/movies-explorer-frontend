@@ -66,6 +66,17 @@
   background-color: transparent;
 }
 
+.profile__button-edit_disabled {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15.73px;
+  margin-top: 220px;
+  margin-bottom: 16px;
+  color: grey;
+  border: 0;
+  background-color: transparent;
+}
+
 .profile__button-exit {
   font-weight: 400;
   font-size: 13px;

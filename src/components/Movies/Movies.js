@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
-import { moviesData } from "../../utils/constans";
 import { getAllMovies } from "../../utils/MoviesApi";
 import Preloader from '../Preloader/Preloader';
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
-function Movies({ filterByName, saveMovies, savedMovies, deleteMovies }) {
+function Movies({ loggedIn, filterByName, saveMovies, savedMovies, deleteMovies }) {
   const moviesAll = JSON.parse(localStorage.getItem('allMovies')) ?? [];
   const moviesShortCheck = JSON.parse(localStorage.getItem('isShortMovies')) ?? false;
 
@@ -88,10 +89,14 @@ function Movies({ filterByName, saveMovies, savedMovies, deleteMovies }) {
   };
 
   return (
-    <main className="main">
-      <SearchForm onSubmit={searchMovies} onCheckboxChange={handleCheckboxChange} shortMovies={shortMovies} />
-      {isLoading ? <Preloader /> : <MoviesCardList moviesData={filterMovies} onClick={handleSaveClick} savedMovies={savedMovies} searchText={searchMovies} />}
-    </main>
+    <>
+      <Header loggedIn={loggedIn} />
+      <main className="main">
+        <SearchForm onSubmit={searchMovies} onCheckboxChange={handleCheckboxChange} shortMovies={shortMovies} />
+        {isLoading ? <Preloader /> : <MoviesCardList moviesData={filterMovies} onClick={handleSaveClick} savedMovies={savedMovies} searchText={searchMovies} />}
+      </main>
+      <Footer />
+    </>
   )
 }
 

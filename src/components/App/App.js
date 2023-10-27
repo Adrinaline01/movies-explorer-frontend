@@ -177,54 +177,40 @@ function App() {
             </>
           }
         />
-        {/* <Route path='/movies' element=
-          {
-            <>
-              <Header loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} />
-              <Movies filterByName={filterByName} saveMovies={saveMovies} savedMovies={savedMovies} deleteMovies={deleteMovies} />
-              <Footer />
-            </>
+        <Route path='/movies' element=
+          {<ProtectedRoute loggedIn={loggedIn}
+            resetErrorGlobal={resetErrorGlobal}
+            filterByName={filterByName}
+            saveMovies={saveMovies}
+            savedMovies={savedMovies}
+            deleteMovies={deleteMovies}
+            element={Movies} />
           }
-        /> */}
-        <Route path='/movies' element={<ProtectedRoute loggedIn={loggedIn}
-          resetErrorGlobal={resetErrorGlobal}
-          filterByName={filterByName}
-          saveMovies={saveMovies}
-          savedMovies={savedMovies}
-          deleteMovies={deleteMovies}
-          element={<>
-            <Header />
-            <Movies />
-            <Footer />
-          </>} />}
         />
 
-        {/* <Route path='/saved-movies' element=
-          {
-            <>
-              <Header loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} />
-              <SavedMovies filterByName={filterByName} savedMovies={savedMovies} deleteMovies={deleteMovies} />
-              <Footer />
-            </>
+        <Route path='/saved-movies' element=
+          {<ProtectedRoute loggedIn={loggedIn}
+            resetErrorGlobal={resetErrorGlobal}
+            filterByName={filterByName}
+            savedMovies={savedMovies}
+            deleteMovies={deleteMovies}
+            element={SavedMovies} />
           }
-        /> */}
-        <Route path='/saved-movies' element={<ProtectedRoute loggedIn={loggedIn}
-          resetErrorGlobal={resetErrorGlobal}
-          filterByName={filterByName}
-          savedMovies={savedMovies}
-          deleteMovies={deleteMovies} element={
-            <>
-              <Header />
-              <SavedMovies />
-              <Footer />
-            </>
-          } />}
-
         />
+
         <Route path='/signup' element={<Register onRegister={handleRegister} loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
         <Route path='/signin' element={<Login onLogin={handleLogin} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
-        {/* <Route path='/profile' element={<Profile loggedIn={loggedIn} onSignOut={logOut} onUpdateUser={handleUpdateUser} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} /> */}
-        <Route path='/profile' element={<ProtectedRoute loggedIn={loggedIn} onSignOut={logOut} onUpdateUser={handleUpdateUser} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} element={Profile} />} />
+        <Route path='/profile' element=
+          {<ProtectedRoute
+            loggedIn={loggedIn}
+            onSignOut={logOut}
+            onUpdateUser={handleUpdateUser}
+            resetErrorGlobal={resetErrorGlobal}
+            errorGlobal={errorGlobal}
+            element={Profile} />
+          }
+        />
+
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </CurrentUserContext.Provider>

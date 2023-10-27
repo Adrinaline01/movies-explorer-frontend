@@ -1,8 +1,10 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useEffect, useState } from "react";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
-function SavedMovies({ filterByName, savedMovies, deleteMovies }) {
+function SavedMovies({ loggedIn, filterByName, savedMovies, deleteMovies }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isShortMovies, setIsShortMovies] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -43,10 +45,14 @@ function SavedMovies({ filterByName, savedMovies, deleteMovies }) {
 
 
   return (
-    <main className="main">
-      <SearchForm onSubmit={searchMyMovies} onCheckboxChange={handleCheckboxChange} shortMovies={isShortMovies} />
-      <MoviesCardList moviesData={filteredMovies} onClick={handleDeleteMovie} searchText={searchText} />
-    </main>
+    <>
+      <Header loggedIn={loggedIn} />
+      <main className="main">
+        <SearchForm onSubmit={searchMyMovies} onCheckboxChange={handleCheckboxChange} shortMovies={isShortMovies} />
+        <MoviesCardList moviesData={filteredMovies} onClick={handleDeleteMovie} searchText={searchText} />
+      </main>
+      <Footer />
+    </>
   )
 }
 
