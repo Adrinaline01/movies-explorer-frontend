@@ -1,4 +1,10 @@
-import { Route, Router, Routes, useNavigate, useLocation, Navigate } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Main from "../Main/Main";
@@ -11,7 +17,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import * as mainApi from '../../utils/MainApi';
-import { getSavedMovies } from "../../utils/MainApi";
+import { getSavedMovies } from '../../utils/MainApi';
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute"
 
 function App() {
@@ -62,18 +68,6 @@ function App() {
       })
   };
 
-  // const tokenCheck = () => {
-  //   mainApi
-  //     .getUserInfo()
-  //     .then((user) => {
-  //       setCurrentUser(user);
-  //       setLoggedIn(true)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   const tokenCheck = () => {
     const currentPatch = pathname;
     mainApi
@@ -90,7 +84,6 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-
   }, [loggedIn]);
 
   const handleSignOut = () => {
@@ -122,17 +115,20 @@ function App() {
     mainApi
       .patchUserInfo(updateUser)
       .then((data) => {
-        console.log(data)
         setCurrentUser(data);
         alert("Данные профиля изменены успешно")
       })
       .catch((error) => {
-        setErrorGlobal(error);;
+        setErrorGlobal(error);
+        ;
       })
   }
 
   function filterByName(movies, text) {
-    return movies.filter(({ nameRU, nameEN }) => nameRU.toLowerCase().includes(text.toLowerCase()) || nameEN.toLowerCase().includes(text.toLowerCase()));
+    return movies.filter(({
+      nameRU,
+      nameEN
+    }) => nameRU.toLowerCase().includes(text.toLowerCase()) || nameEN.toLowerCase().includes(text.toLowerCase()));
   }
 
   const saveMovies = (movie) => {
@@ -156,10 +152,6 @@ function App() {
       .catch((error) => {
         console.log(error);
       })
-  }
-
-  const logOut = () => {
-    handleSignOut()
   }
 
   return (
@@ -195,12 +187,20 @@ function App() {
           }
         />
 
-        <Route path='/signup' element={loggedIn ? <Navigate to='/movies' replace /> : <Register onRegister={handleRegister} loggedIn={loggedIn} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
-        <Route path='/signin' element={loggedIn ? <Navigate to='/movies' replace /> : <Login onLogin={handleLogin} resetErrorGlobal={resetErrorGlobal} errorGlobal={errorGlobal} />} />
+        <Route path='/signup'
+          element={loggedIn ? <Navigate to='/movies' replace /> :
+            <Register onRegister={handleRegister} loggedIn={loggedIn}
+              resetErrorGlobal={resetErrorGlobal}
+              errorGlobal={errorGlobal} />} />
+        <Route path='/signin'
+          element={loggedIn ? <Navigate to='/movies' replace /> :
+            <Login onLogin={handleLogin}
+              resetErrorGlobal={resetErrorGlobal}
+              errorGlobal={errorGlobal} />} />
         <Route path='/profile' element=
           {<ProtectedRoute
             loggedIn={loggedIn}
-            onSignOut={logOut}
+            onSignOut={handleSignOut}
             onUpdateUser={handleUpdateUser}
             resetErrorGlobal={resetErrorGlobal}
             errorGlobal={errorGlobal}
