@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 18px auto 38px auto;
+  max-width: 89.0625%;
+}
+
+.header__links {
+  gap: 30px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+
+.header__signup-link {
+  width: 77px;
+  max-height: 16px;
+  margin-right: 30px;
+}
+
+.header__signin-button {
+  background-color: #3DDC84;
+  width: 76px;
+  height: 32px;
+  border-radius: 3px;
+  color: #000000;
+  text-align: center;
+  border: 0;
+}
